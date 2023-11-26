@@ -22,5 +22,10 @@ RUN chmod +x /actions-runner/install_actions.sh \
 COPY token.sh entrypoint.sh app_token.sh /
 RUN chmod +x /token.sh /entrypoint.sh /app_token.sh
 
+RUN apt install openjdk-17-jdk
+RUN apt upgrade python3
+RUN python3 --version
+RUN update-alternatives --install /usr/bin/python python /usr/bin/python3.11 1
+
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["./bin/Runner.Listener", "run", "--startuptype", "service"]
